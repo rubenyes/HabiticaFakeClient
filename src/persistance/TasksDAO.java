@@ -103,7 +103,7 @@ public class TasksDAO implements ITasksDAO{
 	public List<Task> getTasksList(String idUser){
 		List<Task> res = null;
 		try{
-			URL url = new URL(host+"/user/"+idUser);
+			URL url = new URL(host+"user/"+idUser);
 			InputStream input = url.openStream();
 			List<Map<String, String>> list = new Gson().fromJson(new InputStreamReader(input, "UTF-8"), new TypeToken<List<Map<String, String>>>(){}.getType());
 			res = new ArrayList<Task>(list.size());
