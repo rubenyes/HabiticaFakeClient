@@ -41,7 +41,7 @@ public class TaskPanel extends JPanel {
 		
 		setLayout(new GridLayout(0, 1, 0, 0));
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EmptyBorder(5, 2, 5, 2)));
-		setMaximumSize(new Dimension((int)Integer.MAX_VALUE, 100));
+		setMaximumSize(new Dimension((int)Integer.MAX_VALUE, 130));
 		
 		JLabel lblTitle = new JLabel(task.getTitle());
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));

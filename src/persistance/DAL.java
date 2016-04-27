@@ -25,7 +25,7 @@ public class DAL {
 	
 	public static DAL givemeDAL(){
 		if(dal == null) dal = new DAL();
-		//dal.setHosts(); //we set the hosts each time we access the persistance layer
+		dal.setHosts(); //we set the hosts each time we access the persistance layer
 		return dal;
 	}
 	

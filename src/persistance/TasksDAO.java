@@ -55,15 +55,15 @@ public class TasksDAO implements ITasksDAO{
 							", \"Owner\": \""+task.getIdUser()+"\""+
 							", \"Completed\": \""+CompletedState.convertToString(task.getState())+"\""+
 							", \"Duedate\": \""+task.getDate().getTimeInMillis()+"\""+
-							", \"ReminderDaysAgo\": \""+task.getReminderDaysAgo()+"\""+
-							", \"ReminderTime\": \""+task.getReminderTime()+"\""+"}";
+							", \"Daysbefore\": \""+task.getReminderDaysAgo()+"\""+
+							", \"Time\": \""+task.getReminderTime().getTimeInMillis()+"\""+"}";
 			
 			byte[] outputBytes = json.getBytes("UTF-8");
 			OutputStream os = httpcon.getOutputStream();
 			os.write(outputBytes);
 			os.close();
 			
-			int code = httpcon.getResponseCode();
+			int code = httpcon.getResponseCode();System.out.println(code+httpcon.getResponseMessage());
 			if(code == 201){
 				//We set the ID
 				InputStream input = httpcon.getInputStream();
@@ -88,9 +88,9 @@ public class TasksDAO implements ITasksDAO{
 			Calendar date = Calendar.getInstance();
 			date.setTimeInMillis(Long.parseLong(map.get("Duedate")));
 			Calendar reminderTime = Calendar.getInstance();
-			reminderTime.setTimeInMillis(Long.parseLong(map.get("ReminderTime")));
+			reminderTime.setTimeInMillis(Long.parseLong(map.get("Time")));
 			CompletedState state = CompletedState.convertToEnum(map.get("Completed"));
-			int reminderDaysAgo = Integer.parseInt(map.get("ReminderDaysAgo"));
+			int reminderDaysAgo = Integer.parseInt(map.get("Daysbefore"));
 			task = new Task(map.get("Owner"), map.get("Title"), map.get("Description"), date, reminderDaysAgo, reminderTime, state);
 			task.setId(map.get("_id"));
 		}catch(Exception e){
@@ -111,9 +111,9 @@ public class TasksDAO implements ITasksDAO{
 				Calendar date = Calendar.getInstance();
 				date.setTimeInMillis(Long.parseLong(map.get("Duedate")));
 				Calendar reminderTime = Calendar.getInstance();
-				reminderTime.setTimeInMillis(Long.parseLong(map.get("ReminderTime")));
+				reminderTime.setTimeInMillis(Long.parseLong(map.get("Time")));
 				CompletedState state = CompletedState.convertToEnum(map.get("Completed"));
-				int reminderDaysAgo = Integer.parseInt(map.get("ReminderDaysAgo"));
+				int reminderDaysAgo = Integer.parseInt(map.get("Daysbefore"));
 				Task task = new Task(map.get("Owner"), map.get("Title"), map.get("Description"), date, reminderDaysAgo, reminderTime, state);
 				task.setId(map.get("_id"));
 				res.add(task);

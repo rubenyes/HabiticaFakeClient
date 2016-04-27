@@ -46,7 +46,7 @@ public class HabitPanel extends JPanel {
 		
 		setLayout(new BorderLayout(0, 0));
 		setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 0)), new EmptyBorder(5, 2, 5, 2)));
-		setMaximumSize(new Dimension((int)Integer.MAX_VALUE, 80));
+		setMaximumSize(new Dimension((int)Integer.MAX_VALUE, 70));
 		
 		panelButtons = new JPanel();
 		add(panelButtons, BorderLayout.WEST);
