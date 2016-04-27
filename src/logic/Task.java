@@ -30,6 +30,8 @@ public class Task implements Comparable<Task>{
 		this.reminderTime = reminderTime;
 		this.state = state;
 		
+		if(state != CompletedState.NOTYET) this.completed = true;
+		
 		//We create a calendar with the exactly reminder date for make easier the comparations
 		this.reminder = Calendar.getInstance();
 		this.reminder.setTime(date.getTime());

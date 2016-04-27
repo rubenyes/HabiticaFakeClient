@@ -113,6 +113,7 @@ public class TasksDAO implements ITasksDAO{
 				Calendar reminderTime = Calendar.getInstance();
 				reminderTime.setTimeInMillis(Long.parseLong(map.get("Time")));
 				CompletedState state = CompletedState.convertToEnum(map.get("Completed"));
+				System.out.println(state);
 				int reminderDaysAgo = Integer.parseInt(map.get("Daysbefore"));
 				Task task = new Task(map.get("Owner"), map.get("Title"), map.get("Description"), date, reminderDaysAgo, reminderTime, state);
 				task.setId(map.get("_id"));
@@ -142,14 +143,19 @@ public class TasksDAO implements ITasksDAO{
 	@Override
 	public void completedTask(String idTask, boolean completed) {
 		try{
+			System.out.println(idTask);
 			URL url = new URL(host+idTask+"/"+completed);
-			HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-			httpCon.setDoOutput(true);
-			httpCon.setRequestMethod("PUT");
-			OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-			out.write(completed+"");
-			out.close();
-			httpCon.getInputStream();
+			HttpURLConnection httpcon = (HttpURLConnection) url.openConnection();
+			httpcon.setDoOutput(true);
+			httpcon.setRequestMethod("POST");
+			httpcon.connect();
+				
+			byte[] outputBytes = "completed".getBytes("UTF-8");
+			OutputStream os = httpcon.getOutputStream();
+			os.write(outputBytes);	
+			os.close();			
+
+			System.out.println(httpcon.getResponseCode()+" "+httpcon.getResponseMessage());
 		}catch(Exception e){
 			e.printStackTrace();
 		}

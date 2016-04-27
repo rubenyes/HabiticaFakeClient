@@ -77,6 +77,9 @@ public class TaskPanel extends JPanel {
 			}
 		});
 		panel.add(chckbxCompleted, BorderLayout.WEST);
+		
+		//We check if the task is completed or not
+		if(task.isCompleted()) chckbxCompleted.setSelected(true);
 
 		//Paint
 		defineColor();
@@ -99,6 +102,11 @@ public class TaskPanel extends JPanel {
 				setBackground(Color.YELLOW);
 				panel.setBackground(Color.YELLOW);
 				chckbxCompleted.setBackground(Color.YELLOW);
+			}
+			else{
+				setBackground(Color.WHITE);
+				panel.setBackground(Color.WHITE);
+				chckbxCompleted.setBackground(Color.WHITE);
 			}
 		}
 	}
